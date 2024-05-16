@@ -1,19 +1,25 @@
-package com.cydeo.dto;
+package com.cydeo.entity;
+
+import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "projects")
 @NoArgsConstructor
-@AllArgsConstructor
-public class ProjectDTO {
+@Where(clause = "is_deleted = false")
+public class Project extends BaseEntity {
 
 
     private String projectName;
@@ -22,25 +28,29 @@ public class ProjectDTO {
     private String projectCode;
 
 
-    private UserDTO assignedManager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private User assignedManager;
 
-    @NotNull
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(columnDefinition = "DATE")
     private LocalDate startDate;
 
-    @NotNull
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(columnDefinition = "DATE")
     private LocalDate endDate;
 
-    @NotBlank
-    private String projectDetail;
 
+    private String projectDetail;
+    @Enumerated(EnumType.STRING)
     private Status projectStatus;
 
     private int completeTaskCounts;
     private int unfinishedTaskCounts;
 
-    public ProjectDTO(String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
+    public Project(String projectName, String projectCode, User assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
         this.projectName = projectName;
         this.projectCode = projectCode;
         this.assignedManager = assignedManager;
@@ -49,5 +59,4 @@ public class ProjectDTO {
         this.projectDetail = projectDetail;
         this.projectStatus = projectStatus;
     }
-
 }

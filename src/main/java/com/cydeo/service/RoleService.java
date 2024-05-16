@@ -10,4 +10,6 @@ public interface RoleService {
 
     RoleDTO findById(Long id);
 
+
+
 }
