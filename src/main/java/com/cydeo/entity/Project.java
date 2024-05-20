@@ -47,8 +47,8 @@ public class Project extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Status projectStatus;
 
-    private int completeTaskCounts;
-    private int unfinishedTaskCounts;
+
+
 
     public Project(String projectName, String projectCode, User assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
         this.projectName = projectName;
