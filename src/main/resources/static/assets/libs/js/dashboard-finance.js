@@ -1,4 +1,3 @@
-
 /*
 Template Name: Influence Admin Template
 Author: jitu
@@ -7,10 +6,10 @@ File: js
 */
 $(function() {
     "use strict";
-
-    // ==============================================================
+    
+    // ============================================================== 
     // Revenue Cards
-    // ==============================================================
+    // ============================================================== 
     $("#sparkline-revenue").sparkline([5, 5, 7, 7, 9, 5, 3, 5, 2, 4, 6, 7], {
         type: 'line',
         width: '99.5%',
@@ -76,14 +75,14 @@ $(function() {
         highlightLineColor: undefined,
         resize:true,
     });
-    // ==============================================================
+    // ============================================================== 
     // Chart Balance Bar
-    // ==============================================================
+    // ============================================================== 
     var ctx = document.getElementById("chartjs_balance_bar").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
 
-
+        
         data: {
             labels: ["Current", "1-30", "31-60", "61-90", "91+"],
             datasets: [{
@@ -106,97 +105,97 @@ $(function() {
         },
         options: {
             legend: {
-                display: true,
+                    display: true,
 
-                position: 'bottom',
+                    position: 'bottom',
 
-                labels: {
-                    fontColor: '#71748d',
-                    fontFamily:'Circular Std Book',
-                    fontSize: 14,
-                }
+                    labels: {
+                        fontColor: '#71748d',
+                        fontFamily:'Circular Std Book',
+                        fontSize: 14,
+                    }
             },
 
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                        fontFamily:'Circular Std Book',
-                        fontColor: '#71748d',
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                        fontFamily:'Circular Std Book',
-                        fontColor: '#71748d',
-                    }
-                }]
-            }
-        }
+                scales: {
+                    xAxes: [{
+                ticks: {
+                    fontSize: 14,
+                     fontFamily:'Circular Std Book',
+                     fontColor: '#71748d',
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    fontSize: 14,
+                     fontFamily:'Circular Std Book',
+                     fontColor: '#71748d',
+                }
+            }]
+                }
+    }
 
 
 
-    });
-
-
-    // ==============================================================
+});
+ 
+    
+    // ============================================================== 
     // Gross Profit Margin
-    // ==============================================================
-    Morris.Donut({
-        element: 'morris_gross',
+    // ============================================================== 
+   Morris.Donut({
+                element: 'morris_gross',
 
-        data: [
-            { value: 94, label: 'Budget' },
-            { value: 15, label: '' }
+                data: [
+                    { value: 94, label: 'Budget' },
+                    { value: 15, label: '' }
+                   
+                ],
+             
+                labelColor: '#5969ff',
 
-        ],
+                colors: [
+                    '#5969ff',
+                    '#a8b0ff'
+                   
+                ],
 
-        labelColor: '#5969ff',
+                formatter: function(x) { return x + "%" },
+                  resize: true
 
-        colors: [
-            '#5969ff',
-            '#a8b0ff'
+            });
 
-        ],
-
-        formatter: function(x) { return x + "%" },
-        resize: true
-
-    });
-
-    // ==============================================================
+    // ============================================================== 
     // Net Profit Margin
-    // ==============================================================
+    // ============================================================== 
     Morris.Donut({
-        element: 'morris_profit',
+                element: 'morris_profit',
 
-        data: [
-            { value: 93, label: 'Profit' },
-            { value: 15, label: '' }
-
-        ],
-
-        labelColor: '#ff407b',
-
-
-        colors: [
-            '#ff407b',
-            '#ffd5e1'
-
-        ],
-
-        formatter: function(x) { return x + "%" },
-        resize: true
-
-    });
+                data: [
+                    { value: 93, label: 'Profit' },
+                    { value: 15, label: '' }
+                   
+                ],
+             
+                labelColor: '#ff407b',
 
 
+                colors: [
+                    '#ff407b',
+                    '#ffd5e1'
+                   
+                ],
+
+                formatter: function(x) { return x + "%" },
+                  resize: true
+
+            });
 
 
-    // ==============================================================
+
+
+    // ============================================================== 
     //EBIT Morris
-    // ==============================================================
+    // ============================================================== 
 
     Morris.Bar({
         element: 'ebit_morris',
@@ -223,9 +222,9 @@ $(function() {
 
 
 
-    // ==============================================================
+    // ============================================================== 
     //EBIT Morris
-    // ==============================================================
+    // ============================================================== 
     var a = c3.generate({
         bindto: "#goodservice",
         size: { height: 350 },
@@ -243,8 +242,8 @@ $(function() {
 
         },
         legend: {
-            show: true
-        },
+  show: true
+},
         axis: {
             y: {
                 tick: {
@@ -258,9 +257,9 @@ $(function() {
 
 
 
-    // ==============================================================
+    // ============================================================== 
     // Disputed vs Overdue Invoices
-    // ==============================================================
+    // ============================================================== 
     var data = {
         labels: ['Disputed Invoice', 'Overdue Invoice'],
         series: [20, 15]
@@ -290,9 +289,9 @@ $(function() {
     new Chartist.Pie('.ct-chart-invoice', data, options, responsiveOptions);
 
 
-    // ==============================================================
+    // ============================================================== 
     // Disputed vs Overdue Invoices
-    // ==============================================================
+    // ============================================================== 
 
     new Chartist.Line('.ct-chart-line-invoice', {
         labels: ['Jan 2018', 'Mar 2018', 'May 2018', 'Jul 2018', 'Sep 2018', 'Oct 2018', 'Nov 2018'],
@@ -317,9 +316,9 @@ $(function() {
 
 
 
-    // ==============================================================
+    // ============================================================== 
     // Accounts Payable Age
-    // ==============================================================
+    // ============================================================== 
 
     var chart = c3.generate({
         bindto: "#account",
@@ -330,34 +329,34 @@ $(function() {
                 ['30 days', 120],
                 ['60 days', 70],
                 ['90 days', 50],
-                ['90+ Days', 30],
+                 ['90+ Days', 30],
 
             ],
             type: 'pie',
-
+            
         }
     });
 
     setTimeout(function() {
         chart.load({
-
+            
         });
     }, 1500);
 
     setTimeout(function() {
-            chart.unload({
-                ids: 'data1'
-            });
-            chart.unload({
-                ids: 'data2'
-            });
-        },
-        2500
+        chart.unload({
+            ids: 'data1'
+        });
+        chart.unload({
+            ids: 'data2'
+        });
+    }, 
+    2500
     );
 
-    // ==============================================================
+    // ============================================================== 
     // Working Capital
-    // ==============================================================
+    // ============================================================== 
 
     // // Use Morris.Area instead of Morris.Line
     Morris.Area({
@@ -386,10 +385,10 @@ $(function() {
 
 
     });
-
-    // ==============================================================
+   
+    // ============================================================== 
     // Working Capital
-    // ==============================================================
+    // ============================================================== 
     new Chartist.Bar('.ct-chart-inventory', {
         labels: ['Q1', 'Q2', 'Q3', 'Q4'],
         series: [
