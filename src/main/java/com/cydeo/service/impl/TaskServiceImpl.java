@@ -8,6 +8,7 @@ import com.cydeo.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +32,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDTO findById(Long id) {
-        return null;
+        Optional<Task> task = taskRepository.findById(id);
+        TaskDTO convertedTask = taskMapper.convertToDTO(task.get());
+        return convertedTask;
     }
 
     @Override
