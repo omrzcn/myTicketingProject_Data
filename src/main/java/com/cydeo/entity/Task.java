@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Where(clause = "is_deleted_false")
+@Where(clause = "is_deleted=false")
 public class Task extends BaseEntity {
 
 
