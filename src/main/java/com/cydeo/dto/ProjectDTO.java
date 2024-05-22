@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ProjectDTO {
 
 
@@ -41,7 +40,8 @@ public class ProjectDTO {
     private int completeTaskCounts;
     private int unfinishedTaskCounts;
 
-    public ProjectDTO(String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
+    public ProjectDTO(Long id, String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus, int completeTaskCounts, int unfinishedTaskCounts) {
+        this.id = id;
         this.projectName = projectName;
         this.projectCode = projectCode;
         this.assignedManager = assignedManager;
@@ -49,6 +49,7 @@ public class ProjectDTO {
         this.endDate = endDate;
         this.projectDetail = projectDetail;
         this.projectStatus = projectStatus;
+        this.completeTaskCounts = completeTaskCounts;
+        this.unfinishedTaskCounts = unfinishedTaskCounts;
     }
-
 }

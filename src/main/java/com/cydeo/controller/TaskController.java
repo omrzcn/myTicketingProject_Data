@@ -20,6 +20,7 @@ public class TaskController {
     private final ProjectService projectService;
     private final TaskService taskService;
 
+
     public TaskController(UserService userService, ProjectService projectService, TaskService taskService) {
         this.userService = userService;
         this.projectService = projectService;
@@ -94,12 +95,12 @@ public class TaskController {
 
     }
 
-//    @GetMapping("/employee/pending-tasks")
-//    public String employeePendingTasks(Model model) {
-//        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
-//        return "/task/pending-tasks";
-//    }
-//
+    @GetMapping("/employee/pending-tasks")
+    public String employeePendingTasks(Model model) {
+        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
+        return "/task/pending-tasks";
+    }
+
 //    @GetMapping("/employee/archive")
 //    public String employeeArchivedTasks(Model model) {
 //        model.addAttribute("tasks", taskService.findAllTasksByStatus(Status.COMPLETE));
