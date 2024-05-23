@@ -1,6 +1,7 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.entity.Project;
 import com.cydeo.entity.User;
 import com.cydeo.enums.Status;
@@ -101,6 +102,8 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectStatus(Status.COMPLETE);
         projectRepository.save(project);
 
+        taskService.completeByProject(projectMapper.convertToDTO(project)); // i created completeByProject method if i click complete button of project, every task related with that project need to be completed
+
     }
 
     @Override
@@ -127,6 +130,14 @@ public class ProjectServiceImpl implements ProjectService {
 
 
 
+    }
+
+    @Override
+    public List<ProjectDTO> listAllNonCompletedByAssignedManager(UserDTO assignedManager) {
+
+        List<Project> projectList = projectRepository.findAllByProjectStatusIsNotAndAssignedManager(Status.COMPLETE,userMapper.convertToEntity(assignedManager));
+
+        return projectList.stream().map(projectMapper::convertToDTO).collect(Collectors.toList());
     }
 }
 
