@@ -33,12 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> findAllUsers() {
-        return userRepository.findAll(Sort.by("firstName")).stream().map(userMapper::convertToDTO).collect(Collectors.toList());
+        //findAll(Sort.by("firstName")).stream().map(userMapper::convertToDTO).collect(Collectors.toList());  this one was old one
+        List<User> userList = userRepository.findAllByIsDeletedOrderByFirstNameDesc(false);
+        return userList.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
     }
 
     @Override
     public UserDTO findByUserName(String username) {
-        return userMapper.convertToDTO(userRepository.findByUserName(username));
+        //findByUserName(username)  this one was the old one
+        return userMapper.convertToDTO(userRepository.findByUserNameAndIsDeleted(username,false));
     }
 
     @Override
@@ -57,8 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO userDTO) {
+        //findByUserName(userDTO.getUserName()); this one was the old one
 
-       User user1 =  userRepository.findByUserName(userDTO.getUserName());
+       User user1 =  userRepository.findByUserNameAndIsDeleted(userDTO.getUserName(), false);
        User convertedUser = userMapper.convertToEntity(userDTO);
        convertedUser.setId(user1.getId());
        userRepository.save(convertedUser);
@@ -71,10 +75,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(String username) {
         // go to db and get user from db based on username
-        User user1 = userRepository.findByUserName(username);
+        User user1 = userRepository.findByUserNameAndIsDeleted(username,false);
+
         if (checkIfUserCanBeDeleted(user1)) { // if its true delete the user, if its not do not do anything. True means deletable or not.
             // change the isDeleted to true
             user1.setIsDeleted(true);
+            user1.setUserName( user1.getUserName()+"-"+user1.getId() ); // if i delete user, on the table its gonna show username-id. with this way i can create same user in the database
             // and save the object db again to avoid deleting item from db, just delete from ui.
             userRepository.save(user1);
         }
@@ -83,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listAllByRole(String role) {
-        List<User> users = userRepository.findByRoleDescriptionIgnoreCase(role);
+        List<User> users = userRepository.findByRoleDescriptionIgnoreCaseAndIsDeleted(role,false);
 
 
         return users.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
