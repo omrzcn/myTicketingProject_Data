@@ -109,7 +109,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
 
-        User user1 = userRepository.findByUserName("harold@manager.com");
+        User user1 = userRepository.findByUserNameAndIsDeleted("harold@manager.com",false);
         List<Project> projects = projectRepository.findProjectByAssignedManager(user1);
 
 
